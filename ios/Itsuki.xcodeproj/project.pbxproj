@@ -145,7 +145,6 @@
 				6AD71D7AA54190E397F4DAE6 /* Pods-Itsuki-ItsukiTests.debug.xcconfig */,
 				47567B189AFE0B9B0C59C0FC /* Pods-Itsuki-ItsukiTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -483,8 +482,10 @@
 			baseConfigurationReference = B5B03D53AED62EC59BFC1A1F /* Pods-Itsuki.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 389D7U2389;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Itsuki/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -496,7 +497,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hibiki-app.Itsuki";
 				PRODUCT_NAME = Itsuki;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -509,8 +510,10 @@
 			baseConfigurationReference = 4B6A47A3BED8967B4D41C3E7 /* Pods-Itsuki.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 389D7U2389;
 				INFOPLIST_FILE = Itsuki/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,7 +524,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hibiki-app.Itsuki";
 				PRODUCT_NAME = Itsuki;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
