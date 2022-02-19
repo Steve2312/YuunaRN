@@ -4,7 +4,7 @@ import theme from '../config/Theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Beatmap from "../interfaces/Beatmap";
 import usePreviewService from "../hooks/usePreviewService";
-import PreviewService from "../services/PreviewService";
+import PreviewPlayer from "../services/PreviewPlayer";
 
 type Props = {
     beatmap: Beatmap
@@ -53,7 +53,11 @@ const PreviewCard: React.FC<Props> = ({ beatmap }) => {
     const AnimatedIonicons = Animated.createAnimatedComponent(Ionicons);
 
     const playPreview = () => {
-        PreviewService.play(id);
+        if (!isCurrentSongPlaying) {
+            PreviewPlayer.play(id);
+        } else {
+            PreviewPlayer.playPause();
+        }
     }
 
     return (

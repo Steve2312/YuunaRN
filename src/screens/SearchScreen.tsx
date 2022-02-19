@@ -1,20 +1,23 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import React, { useEffect } from "react";
-import { SectionList, StyleSheet, View, Text } from "react-native";
+import { SectionList, StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import SafeAreaContainer from '../components/SafeAreaContainer';
 import Title from '../components/Title';
 import theme from '../config/Theme';
 import PreviewCard from '../components/PreviewCard';
-import useRecentlyAddedBeatmaps from "../hooks/useRecentlyAddedBeatmaps";
+import useRecentBeatmaps from "../hooks/useRecentBeatmaps";
+import LoadingIndicator from '../components/LoadingIndicator';
 
 type Props = BottomTabScreenProps<{}>;
 
 const SearchScreen: React.FC<Props> = ({route}) => {
 
-    const [results, fetch] = useRecentlyAddedBeatmaps();
+    const [results, fetching, fetch] = useRecentBeatmaps();
 
     return (
         <SafeAreaContainer>
+
+            <LoadingIndicator loading={fetching}/>
             <SectionList
                     style={styles.container}
                     indicatorStyle={theme.custom.indicator}
@@ -24,7 +27,7 @@ const SearchScreen: React.FC<Props> = ({route}) => {
                     renderSectionHeader={({section: { title }}) => {
                         return (
                             <View style={styles.sectionHeader}>
-                                <Text style={styles.subTitle}>{title}</Text>
+                                <Text style={styles.subtitle}>{title}</Text>
                             </View>
                         );
                     }}
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
         marginVertical: 7,
         backgroundColor: theme.navigation.colors.border
     },
-    subTitle: {
+    subtitle: {
         color: theme.navigation.colors.text,
         fontWeight: "bold",
         fontSize: 16,

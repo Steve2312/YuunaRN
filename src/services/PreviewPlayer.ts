@@ -15,7 +15,7 @@ class PreviewService {
 
     private player: Player | null = null;
 
-    public play = async (beatmapsetID: number) => {
+    public play = (beatmapsetID: number) => {
         this.unload();
 
         this.playingBeatmapsetID = beatmapsetID;
@@ -23,8 +23,7 @@ class PreviewService {
         this.notifyObservers();
     
         this.player = new Player(this.previewURL + beatmapsetID + ".mp3", {
-            autoDestroy: false,
-            continuesToPlayInBackground: true,
+            autoDestroy: false
         });
     
         this.player.on("ended", () => {
@@ -32,12 +31,16 @@ class PreviewService {
         })
     
     
-        this.player.play((err) => {
-            console.log(err)
-        });
+        this.player.play();
     }
 
-    public unload = async () => {
+    public pause = () => {
+        if (this.player) {
+            this.player.pause();
+        }
+    }
+
+    public unload = () => {
         this.playingBeatmapsetID = -1;
         this.isPlaying = false;
         this.notifyObservers();
@@ -48,7 +51,7 @@ class PreviewService {
         }
     }
 
-    public playPause = async () => {
+    public playPause = () => {
         if (this.player) {
             this.player.playPause(() => {
                 this.isPlaying = this.player.isPlaying;
@@ -70,11 +73,11 @@ class PreviewService {
 
     public notifyObservers = () => {
         for (let i = 0; i < this.observers.length; i++) {
-            this.observers[i]({...this.getObject()});
+            this.observers[i]({...this.getState()});
         }
     }
 
-    public getObject = (): PreviewState => {
+    public getState = (): PreviewState => {
         return {
             playingBeatmapsetID: this.playingBeatmapsetID,
             isPlaying: this.isPlaying

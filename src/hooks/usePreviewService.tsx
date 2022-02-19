@@ -1,14 +1,25 @@
 import { useEffect, useState } from "react";
-import PreviewService from '../services/PreviewService';
+import { AppState } from "react-native";
+import { AppStateStatus } from "react-native";
+import PreviewPlayer from '../services/PreviewPlayer';
 
 const usePreviewService = () => {
-    const [state, setState] = useState(PreviewService.getObject());
+    const [state, setState] = useState(PreviewPlayer.getState());
+
+    const handleAppStateChange = (state: AppStateStatus) => {
+        if (state == "inactive" || state == "background") {
+            PreviewPlayer.pause();
+        }
+    }
 
     useEffect(() => {
-        PreviewService.registerObserver(setState);
+        PreviewPlayer.registerObserver(setState);
+        
+        const event = AppState.addEventListener("change", handleAppStateChange);
 
         return () => {
-            PreviewService.unregisterObserver(setState);
+            PreviewPlayer.unregisterObserver(setState);
+            event.remove();
         }
     },[])
 
