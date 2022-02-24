@@ -7,6 +7,7 @@ import theme from '../config/Theme';
 import PreviewCard from '../components/PreviewCard';
 import useRecentBeatmaps from "../hooks/useRecentBeatmaps";
 import LoadingIndicator from '../components/LoadingIndicator';
+import SearchBar from "../components/SearchBar";
 
 type Props = BottomTabScreenProps<{}>;
 
@@ -27,6 +28,7 @@ const SearchScreen: React.FC<Props> = ({route}) => {
                     renderSectionHeader={({section: { title }}) => {
                         return (
                             <View style={styles.sectionHeader}>
+                                <SearchBar disabled/>
                                 <Text style={styles.subtitle}>{title}</Text>
                             </View>
                         );
@@ -45,6 +47,8 @@ const SearchScreen: React.FC<Props> = ({route}) => {
                     getItemLayout={(data, index) => ({index, length: 60, offset: index * (60 + 15)})}
                     ItemSeparatorComponent={() => <View style={styles.seperatorComponent}/>}
                     contentContainerStyle={styles.content}
+                    keyboardShouldPersistTaps="never"
+                    keyboardDismissMode="on-drag"
                 />
         </SafeAreaContainer>
     )
