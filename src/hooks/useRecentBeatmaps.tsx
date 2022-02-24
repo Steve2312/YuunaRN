@@ -6,14 +6,16 @@ const useRecentBeatmaps = (): [Beatmap[], boolean, Function] => {
 
     const [page, setPage] = useState<number>(0); 
     const [fetching, setFetching] = useState<boolean>(false); 
-    const [beatmaps, setBeatmaps] = useState<Beatmap[]>([]); 
+    const [beatmaps, setBeatmaps] = useState<Beatmap[]>([]);
 
     const fetch = () => {
         if (!fetching) {
             setFetching(true);
 
             BeatconnectService.getRecentRankedBeatmaps(page).then(newBeatmaps => {
-                setBeatmaps([...beatmaps, ...newBeatmaps]);
+                const exisitingBeatmapIDs = beatmaps.map(beatmap => beatmap.id);
+                const filteredNewBeatmaps = newBeatmaps.filter(newBeatmap => !exisitingBeatmapIDs.includes(newBeatmap.id))
+                setBeatmaps([...beatmaps, ...filteredNewBeatmaps]);
                 setPage(page + 1);
                 setFetching(false);
             });
